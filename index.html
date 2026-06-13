@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AURUM — Premium lifestyle brand. Discover curated fashion, electronics, and luxury accessories crafted for those who demand more." />
+  <meta name="keywords" content="luxury fashion, premium products, designer accessories, aurum shop" />
+  <title>AURUM — Premium Lifestyle Brand</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            aurum: {
+              black:  '#0A0A0A',
+              dark:   '#111111',
+              card:   '#161616',
+              border: '#242424',
+              muted:  '#3A3A3A',
+              text:   '#9A9A9A',
+              light:  '#E8E8E8',
+              white:  '#F5F4F0',
+              gold:   '#C9A84C',
+              'gold-light': '#E2C880',
+              'gold-dark':  '#9B7D36',
+              accent: '#D4AF6A',
+            }
+          },
+          backgroundImage: {
+            'gold-gradient': 'linear-gradient(135deg, #C9A84C 0%, #E2C880 50%, #9B7D36 100%)',
+            'dark-gradient': 'linear-gradient(180deg, #0A0A0A 0%, #161616 100%)',
+          },
+          boxShadow: {
+            'gold': '0 0 40px rgba(201,168,76,0.15)',
+            'gold-lg': '0 0 80px rgba(201,168,76,0.2)',
+            'card': '0 4px 40px rgba(0,0,0,0.4)',
+            'card-hover': '0 20px 60px rgba(0,0,0,0.6)',
+          },
+          animation: {
+            'fade-up':    'fadeUp 0.8s ease forwards',
+            'fade-in':    'fadeIn 0.6s ease forwards',
+            'slide-left': 'slideLeft 0.8s ease forwards',
+            'slide-right':'slideRight 0.8s ease forwards',
+            'float':      'float 6s ease-in-out infinite',
+            'counter':    'counter 2s ease-out forwards',
+            'shimmer':    'shimmer 2s linear infinite',
+            'ticker':     'ticker 30s linear infinite',
+          },
+          keyframes: {
+            fadeUp:    { '0%':{ opacity:'0', transform:'translateY(30px)' }, '100%':{ opacity:'1', transform:'translateY(0)' } },
+            fadeIn:    { '0%':{ opacity:'0' }, '100%':{ opacity:'1' } },
+            slideLeft: { '0%':{ opacity:'0', transform:'translateX(-40px)' }, '100%':{ opacity:'1', transform:'translateX(0)' } },
+            slideRight:{ '0%':{ opacity:'0', transform:'translateX(40px)' }, '100%':{ opacity:'1', transform:'translateX(0)' } },
+            float:     { '0%,100%':{ transform:'translateY(0px)' }, '50%':{ transform:'translateY(-12px)' } },
+            shimmer:   { '0%':{ backgroundPosition:'-200% 0' }, '100%':{ backgroundPosition:'200% 0' } },
+            ticker:    { '0%':{ transform:'translateX(0)' }, '100%':{ transform:'translateX(-50%)' } },
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #0A0A0A;
+      color: #E8E8E8;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0A0A0A; }
+    ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 2px; }
+
+    /* ─── Selection ─── */
+    ::selection { background: rgba(201,168,76,0.3); color: #F5F4F0; }
+
+    /* ─── Gold Text ─── */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #C9A84C 0%, #E2C880 50%, #9B7D36 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── Glassmorphism ─── */
+    .glass {
+      background: rgba(22,22,22,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,168,76,0.12);
+    }
+    .glass-light {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ─── Reveal Animations ─── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ─── Button Styles ─── */
+    .btn-gold {
+      background: linear-gradient(135deg, #C9A84C, #E2C880, #9B7D36);
+      background-size: 200% 200%;
+      color: #0A0A0A;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+    }
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.5);
+      color: #C9A84C;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: #C9A84C;
+      transform: translateY(-1px);
+    }
+
+    /* ─── Product Card ─── */
+    .product-card { transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s ease; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
+    .product-card .card-img { overflow: hidden; }
+    .product-card .card-img img { transition: transform 0.6s cubic-bezier(.22,1,.36,1); }
+    .product-card:hover .card-img img { transform: scale(1.06); }
+    .product-card .add-cart-btn { transform: translateY(100%); opacity: 0; transition: transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.3s ease; }
+    .product-card:hover .add-cart-btn { transform: translateY(0); opacity: 1; }
+    .wishlist-btn { transition: color 0.2s, transform 0.2s; }
+    .wishlist-btn:hover { color: #C9A84C; transform: scale(1.15); }
+    .wishlist-btn.active { color: #C9A84C; }
+
+    /* ─── Category Card ─── */
+    .cat-card { overflow: hidden; }
+    .cat-card img { transition: transform 0.6s cubic-bezier(.22,1,.36,1); }
+    .cat-card:hover img { transform: scale(1.08); }
+    .cat-card .cat-overlay { transition: background 0.4s ease; }
+    .cat-card:hover .cat-overlay { background: rgba(0,0,0,0.35) !important; }
+
+    /* ─── Navbar ─── */
+    #navbar { transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+    #navbar.scrolled { background: rgba(10,10,10,0.95) !important; backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(201,168,76,0.15); }
+
+    /* ─── Hamburger ─── */
+    .ham-line { transition: transform 0.35s ease, opacity 0.25s ease; }
+    .ham-open .ham-top { transform: translateY(7px) rotate(45deg); }
+    .ham-open .ham-mid { opacity: 0; transform: scaleX(0); }
+    .ham-open .ham-bot { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── Mobile Menu ─── */
+    #mobile-menu { transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.3s ease; }
+    #mobile-menu.closed { transform: translateX(100%); opacity: 0; pointer-events: none; }
+    #mobile-menu.open { transform: translateX(0); opacity: 1; pointer-events: all; }
+
+    /* ─── Ticker ─── */
+    .ticker-wrap { overflow: hidden; }
+    .ticker-inner { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+    .ticker-inner:hover { animation-play-state: paused; }
+
+    /* ─── FAQ ─── */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(.22,1,.36,1), opacity 0.3s ease; opacity: 0; }
+    .faq-answer.open { max-height: 300px; opacity: 1; }
+    .faq-icon { transition: transform 0.3s ease; }
+    .faq-open .faq-icon { transform: rotate(45deg); }
+
+    /* ─── Stat Counter ─── */
+    .stat-num { font-variant-numeric: tabular-nums; }
+
+    /* ─── Shimmer ─── */
+    .shimmer-btn {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2.5s linear infinite;
+    }
+
+    /* ─── Custom Checkbox ─── */
+    input[type="checkbox"] { accent-color: #C9A84C; }
+
+    /* ─── Star Rating ─── */
+    .stars { color: #C9A84C; letter-spacing: 1px; font-size: 0.78rem; }
+
+    /* ─── Line Separator ─── */
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
+
+    /* ─── Play Button ─── */
+    .play-btn { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .play-btn:hover { transform: scale(1.08); box-shadow: 0 0 50px rgba(201,168,76,0.4); }
+
+    /* ─── Testimonial ─── */
+    .test-card { transition: transform 0.35s ease, border-color 0.3s ease; }
+    .test-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.3) !important; }
+
+    /* ─── Input Styles ─── */
+    .input-field {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #E8E8E8;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.04);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+    }
+    .input-field::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* ─── Hero Grain ─── */
+    .hero-grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ─── Section Label ─── */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C9A84C;
+    }
+
+    /* ─── Brand Logos ─── */
+    .brand-logo { filter: brightness(0) invert(0.35); transition: filter 0.3s ease, transform 0.3s ease; }
+    .brand-logo:hover { filter: brightness(0) invert(0.7) sepia(1) saturate(2) hue-rotate(5deg); transform: scale(1.05); }
+
+    /* ─── Video Overlay ─── */
+    #video-overlay { transition: opacity 0.4s ease; }
+
+    /* ─── Tooltip ─── */
+    [data-tooltip] { position: relative; }
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+      background: #161616; color: #E8E8E8; font-size: 0.7rem; padding: 4px 10px;
+      border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none;
+      border: 1px solid rgba(201,168,76,0.2);
+      transition: opacity 0.2s;
+    }
+    [data-tooltip]:hover::after { opacity: 1; }
+
+    /* ─── Notification Toast ─── */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      background: #161616; border: 1px solid rgba(201,168,76,0.3);
+      color: #E8E8E8; padding: 14px 20px; border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.3s ease;
+      font-size: 0.85rem; min-width: 260px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ─── Cart Badge ─── */
+    #cart-count { min-width: 16px; height: 16px; font-size: 0.6rem; }
+
+    /* ─── Page Loader ─── */
+    #loader {
+      position: fixed; inset: 0; background: #0A0A0A; z-index: 99999;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    /* ─── Offer Banner BG ─── */
+    .offer-bg {
+      background: linear-gradient(135deg, #0A0A0A 0%, #1a1400 50%, #0A0A0A 100%);
+      position: relative;
+    }
+    .offer-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Pricing strikethrough */
+    .price-old { text-decoration: line-through; color: #5a5a5a; font-size: 0.78rem; }
+  </style>
+</head>
+<body class="bg-aurum-black text-aurum-light font-body">
+
+  <!-- ═══════════════════════════════════════════
+       PAGE LOADER
+  ═══════════════════════════════════════════ -->
+  <div id="loader" role="status" aria-label="Loading">
+    <div class="flex flex-col items-center gap-4">
+      <div class="text-3xl font-display font-light tracking-[0.25em] text-gold-gradient">AURUM</div>
+      <div class="w-32 h-px bg-aurum-muted relative overflow-hidden">
+        <div class="absolute inset-y-0 left-0 bg-gold-gradient loader-bar" style="width:0%;transition:width 1.2s ease;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════════════ -->
+  <div id="toast" role="alert" aria-live="polite">
+    <div class="flex items-center gap-3">
+      <div id="toast-icon" class="text-aurum-gold text-lg">✓</div>
+      <span id="toast-msg">Item added to cart</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       STICKY NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-aurum-border/20" role="navigation" aria-label="Main navigation">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="flex items-center justify-between h-16 lg:h-18">
+
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2 shrink-0 group" aria-label="AURUM Home">
+          <div class="w-7 h-7 rounded-full bg-gold-gradient flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,13 1,13" fill="#0A0A0A"/></svg>
+          </div>
+          <span class="font-display text-xl font-semibold tracking-[0.2em] text-aurum-white group-hover:text-aurum-gold transition-colors">AURUM</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <ul class="hidden lg:flex items-center gap-7 text-[0.78rem] font-medium tracking-wide" role="list">
+          <li><a href="#home"       class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Home</a></li>
+          <li><a href="#products"   class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Shop</a></li>
+          <li><a href="#categories" class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Categories</a></li>
+          <li><a href="#best-sellers" class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Best Sellers</a></li>
+          <li><a href="#reviews"    class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Reviews</a></li>
+          <li><a href="#contact"    class="nav-link text-aurum-text hover:text-aurum-white transition-colors duration-200">Contact</a></li>
+        </ul>
+
+        <!-- Desktop Actions -->
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="#" class="text-aurum-text hover:text-aurum-white transition-colors p-2" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </a>
+          <button class="btn-outline px-4 py-2 rounded-lg text-[0.7rem] tracking-widest" onclick="showToast('Sign in coming soon!','ℹ️')">Sign In</button>
+          <button id="cart-btn" class="relative p-2 text-aurum-text hover:text-aurum-gold transition-colors" aria-label="Cart" onclick="showToast('Cart opened','🛒')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-aurum-gold text-aurum-black font-bold rounded-full flex items-center justify-center">3</span>
+          </button>
+          <a href="#products" class="btn-gold px-5 py-2.5 rounded-lg text-[0.7rem]">Shop Now</a>
+        </div>
+
+        <!-- Mobile: Cart + Hamburger -->
+        <div class="flex lg:hidden items-center gap-3">
+          <button class="relative p-2 text-aurum-text" aria-label="Cart" onclick="showToast('Cart opened','🛒')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-aurum-gold text-aurum-black font-bold rounded-full flex items-center justify-center text-[0.58rem]">3</span>
+          </button>
+          <button id="ham-btn" class="flex flex-col gap-[5px] p-2 group" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="ham-line ham-top block w-6 h-[1.5px] bg-aurum-light origin-center"></span>
+            <span class="ham-line ham-mid block w-4 h-[1.5px] bg-aurum-light"></span>
+            <span class="ham-line ham-bot block w-6 h-[1.5px] bg-aurum-light origin-center"></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="closed fixed inset-0 top-16 glass z-40 flex flex-col px-6 pt-8 pb-10 gap-6 lg:hidden overflow-y-auto">
+      <ul class="flex flex-col gap-1" role="list">
+        <li><a href="#home"         class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Home</a></li>
+        <li><a href="#products"     class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Shop</a></li>
+        <li><a href="#categories"   class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Categories</a></li>
+        <li><a href="#best-sellers" class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Best Sellers</a></li>
+        <li><a href="#reviews"      class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Reviews</a></li>
+        <li><a href="#contact"      class="mobile-nav-link block py-3.5 text-lg font-display font-light tracking-wide border-b border-aurum-border text-aurum-light" onclick="closeMenu()">Contact</a></li>
+      </ul>
+      <div class="flex flex-col gap-3 mt-4">
+        <button class="btn-outline w-full py-3.5 rounded-xl tracking-widest" onclick="showToast('Sign in coming soon!','ℹ️'); closeMenu()">Sign In</button>
+        <a href="#products" class="btn-gold w-full py-3.5 rounded-xl text-center tracking-widest block" onclick="closeMenu()">Shop Now</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       ANNOUNCEMENT TICKER
+  ═══════════════════════════════════════════ -->
+  <div class="bg-aurum-gold/90 text-aurum-black text-[0.68rem] font-semibold tracking-[0.15em] uppercase overflow-hidden h-9 flex items-center" style="margin-top:64px;" aria-label="Announcements">
+    <div class="ticker-wrap w-full">
+      <div class="ticker-inner">
+        <span class="px-12">✦ Free Worldwide Shipping on Orders Over $150</span>
+        <span class="px-12">✦ New Arrivals Every Week — Explore the Collection</span>
+        <span class="px-12">✦ Limited Edition Drops — Members Get Early Access</span>
+        <span class="px-12">✦ Secure & Encrypted Checkout on All Orders</span>
+        <span class="px-12">✦ Free Worldwide Shipping on Orders Over $150</span>
+        <span class="px-12">✦ New Arrivals Every Week — Explore the Collection</span>
+        <span class="px-12">✦ Limited Edition Drops — Members Get Early Access</span>
+        <span class="px-12">✦ Secure & Encrypted Checkout on All Orders</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="home" class="relative min-h-screen flex items-center hero-grain overflow-hidden" aria-label="Hero">
+    <!-- BG -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-br from-aurum-black via-aurum-dark to-aurum-black"></div>
+      <div class="absolute top-0 right-0 w-1/2 h-full opacity-25" style="background:radial-gradient(ellipse at 80% 40%, rgba(201,168,76,0.18) 0%, transparent 65%);"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 opacity-10" style="background:radial-gradient(circle, rgba(201,168,76,0.3) 0%, transparent 70%);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[1440px] mx-auto w-full px-4 sm:px-6 lg:px-10 py-20 lg:py-0 lg:min-h-screen flex items-center">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+
+        <!-- Left: Content -->
+        <div class="flex flex-col gap-7 order-2 lg:order-1">
+          <div class="reveal flex items-center gap-3">
+            <div class="h-px w-10 bg-aurum-gold"></div>
+            <span class="section-label">New Collection 2025</span>
+          </div>
+
+          <h1 class="reveal reveal-delay-1 font-display font-light leading-[1.05] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight">
+            Crafted for<br/>
+            <em class="italic text-gold-gradient not-italic font-normal">Those Who</em><br/>
+            Demand More
+          </h1>
+
+          <p class="reveal reveal-delay-2 text-aurum-text leading-relaxed text-base max-w-md">
+            AURUM curates the world's finest fashion, electronics, and lifestyle products — each piece selected for uncompromising quality and timeless design.
+          </p>
+
+          <!-- Trust Badges -->
+          <div class="reveal reveal-delay-3 flex flex-wrap gap-3">
+            <div class="glass-light flex items-center gap-2 px-4 py-2.5 rounded-full text-xs text-aurum-text">
+              <svg class="w-3.5 h-3.5 text-aurum-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>
+              Free Shipping
+            </div>
+            <div class="glass-light flex items-center gap-2 px-4 py-2.5 rounded-full text-xs text-aurum-text">
+              <svg class="w-3.5 h-3.5 text-aurum-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Secured Checkout
+            </div>
+            <div class="glass-light flex items-center gap-2 px-4 py-2.5 rounded-full text-xs text-aurum-text">
+              <svg class="w-3.5 h-3.5 text-aurum-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+              30-Day Returns
+            </div>
+          </div>
+
+          <!-- Rating Badge -->
+          <div class="reveal reveal-delay-3 flex items-center gap-4">
+            <div class="flex items-center gap-1">
+              <span class="stars text-base">★★★★★</span>
+            </div>
+            <div>
+              <span class="text-aurum-white font-semibold text-sm">4.9/5</span>
+              <span class="text-aurum-text text-sm"> from 12,400+ reviews</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="reveal reveal-delay-4 flex flex-wrap gap-4">
+            <a href="#products" class="btn-gold px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5">
+              Explore Collection
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#categories" class="btn-outline px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5">
+              Browse Categories
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Hero Image Stack -->
+        <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-[500px] lg:max-w-none">
+            <!-- Main hero image -->
+            <div class="reveal-right relative z-10 rounded-2xl overflow-hidden shadow-card-hover" style="aspect-ratio:3/4;">
+              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80&auto=format&fit=crop" alt="Premium fashion showcase" class="w-full h-full object-cover" loading="eager" />
+              <div class="absolute inset-0 bg-gradient-to-t from-aurum-black/50 via-transparent to-transparent"></div>
+            </div>
+            <!-- Floating card 1 -->
+            <div class="reveal-right reveal-delay-2 absolute -left-8 bottom-16 glass rounded-xl p-4 max-w-[170px] shadow-gold animate-float z-20">
+              <div class="text-xs text-aurum-text mb-1">Today's Top Pick</div>
+              <div class="font-display text-aurum-white text-base font-medium mb-0.5">Lumière Watch</div>
+              <div class="text-aurum-gold text-sm font-semibold">$480</div>
+            </div>
+            <!-- Floating card 2 -->
+            <div class="reveal-right reveal-delay-3 absolute -right-4 top-16 glass rounded-xl px-4 py-3 shadow-gold z-20">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-gold-gradient flex items-center justify-center text-xs text-aurum-black font-bold">50K</div>
+                <div>
+                  <div class="text-xs text-aurum-text">Happy Clients</div>
+                  <div class="stars text-xs">★★★★★</div>
+                </div>
+              </div>
+            </div>
+            <!-- Decorative ring -->
+            <div class="absolute -bottom-6 -right-6 w-40 h-40 rounded-full border border-aurum-gold/20 z-0"></div>
+            <div class="absolute -top-6 -left-6 w-24 h-24 rounded-full border border-aurum-gold/10 z-0"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-aurum-text/50 text-xs tracking-widest uppercase z-10 animate-bounce">
+      <span>Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-aurum-gold/50 to-transparent"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TRUSTED BRANDS SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="brands" class="py-16 border-y border-aurum-border/30" aria-label="Trusted brands">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+      <p class="reveal text-center section-label mb-10">Trusted & Featured By</p>
+      <div class="reveal grid grid-cols-3 sm:grid-cols-6 gap-8 items-center justify-items-center">
+        <!-- Brand names as styled text (simulating logos) -->
+        <div class="brand-logo font-display text-2xl font-light tracking-widest text-aurum-text cursor-default select-none" aria-label="Vogue">VOGUE</div>
+        <div class="brand-logo font-body text-lg font-bold tracking-wider text-aurum-text cursor-default select-none" aria-label="Forbes">FORBES</div>
+        <div class="brand-logo font-display text-xl font-light tracking-widest text-aurum-text cursor-default select-none" aria-label="GQ">GQ</div>
+        <div class="brand-logo font-body text-base font-bold tracking-[0.3em] text-aurum-text cursor-default select-none" aria-label="Wired">WIRED</div>
+        <div class="brand-logo font-display text-xl font-light tracking-widest text-aurum-text cursor-default select-none" aria-label="Elle">ELLE</div>
+        <div class="brand-logo font-body text-sm font-bold tracking-[0.25em] text-aurum-text cursor-default select-none" aria-label="Hypebeast">HYPEBEAST</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FEATURED PRODUCTS
+  ═══════════════════════════════════════════ -->
+  <section id="products" class="py-24 lg:py-32" aria-label="Featured Products">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <!-- Header -->
+      <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+        <div>
+          <p class="section-label mb-3">New Arrivals</p>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light leading-tight">
+            Featured <em class="text-gold-gradient italic">Products</em>
+          </h2>
+        </div>
+        <a href="#" class="btn-outline px-6 py-2.5 rounded-xl self-start sm:self-end shrink-0">View All →</a>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+        <!-- Product Card Macro -->
+        <!-- Cards 1-8 -->
+        <article class="product-card reveal bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80&auto=format&fit=crop" alt="Premium Watch" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">-30%</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Premium Lumière Watch')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <div class="flex justify-between items-start">
+              <h3 class="font-medium text-sm text-aurum-white leading-snug">Lumière Gold Watch</h3>
+            </div>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(248)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$480</span>
+              <span class="price-old">$690</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-1 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80&auto=format&fit=crop" alt="Fragrance" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-red-500 text-white text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">Hot</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Noir Parfum')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Noir Oud Parfum</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(184)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$195</span>
+              <span class="price-old">$240</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-2 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80&auto=format&fit=crop" alt="Sneakers" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">-25%</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Apex Runners')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Apex Runner V3</h3>
+            <div class="stars text-xs">★★★★½ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(312)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$280</span>
+              <span class="price-old">$375</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-3 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80&auto=format&fit=crop" alt="Camera" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-blue-500 text-white text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">New</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Lumix Instant Camera')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Lumix Instant Camera</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(97)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$340</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80&auto=format&fit=crop" alt="Leather Bag" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">-20%</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Milano Leather Tote')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Milano Leather Tote</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(207)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$560</span>
+              <span class="price-old">$700</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-1 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80&auto=format&fit=crop" alt="Wireless Headphones" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-red-500 text-white text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">Hot</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Echo Pro Headphones')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Echo Pro Headphones</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(519)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$390</span>
+              <span class="price-old">$480</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-2 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=80&auto=format&fit=crop" alt="Sunglasses" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-blue-500 text-white text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">New</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Riviera Sunglasses')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Riviera Sunglasses</h3>
+            <div class="stars text-xs">★★★★½ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(143)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$220</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-3 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80&auto=format&fit=crop" alt="Fashion Jacket" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">-35%</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Maison Leather Jacket')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Maison Leather Jacket</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(378)</span></div>
+            <div class="flex items-center gap-2 mt-auto">
+              <span class="font-semibold text-aurum-white text-sm">$650</span>
+              <span class="price-old">$1,000</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CATEGORIES SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="categories" class="py-24 lg:py-32 bg-aurum-dark" aria-label="Shop Categories">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="reveal text-center mb-14">
+        <p class="section-label mb-3">Browse By</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light">
+          Shop <em class="text-gold-gradient italic">Categories</em>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+
+        <a href="#" class="cat-card reveal group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Fashion category">
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80&auto=format&fit=crop" alt="Fashion" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-400"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Fashion</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">240+ Items</span>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card reveal reveal-delay-1 group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Electronics category">
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80&auto=format&fit=crop" alt="Electronics" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Electronics</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">180+ Items</span>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card reveal reveal-delay-2 group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Shoes category">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format&fit=crop" alt="Shoes" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Shoes</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">320+ Items</span>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card reveal reveal-delay-1 group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Watches category">
+          <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&q=80&auto=format&fit=crop" alt="Watches" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Watches</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">90+ Items</span>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card reveal reveal-delay-2 group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Accessories category">
+          <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80&auto=format&fit=crop" alt="Accessories" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Accessories</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">150+ Items</span>
+          </div>
+        </a>
+
+        <a href="#" class="cat-card reveal reveal-delay-3 group relative rounded-2xl overflow-hidden cursor-pointer border border-aurum-border/30 hover:border-aurum-gold/30 transition-all duration-300" style="aspect-ratio:3/4;" aria-label="Lifestyle category">
+          <img src="https://images.unsplash.com/photo-1493238792000-8113da705763?w=600&q=80&auto=format&fit=crop" alt="Lifestyle" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="cat-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h3 class="font-display text-2xl font-light text-white mb-1">Lifestyle</h3>
+            <span class="text-aurum-gold text-xs tracking-widest uppercase">200+ Items</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHY CHOOSE US
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32" aria-label="Why choose AURUM">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="reveal text-center mb-16">
+        <p class="section-label mb-3">Our Promise</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light">
+          Why Choose <em class="text-gold-gradient italic">AURUM</em>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+
+        <div class="reveal glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">Fast Delivery</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">Express worldwide shipping in 2–5 business days with real-time tracking on every order.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-1 glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">Secure Payment</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">256-bit SSL encryption across all transactions. We accept cards, PayPal, and crypto.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2 glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">Easy Returns</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">No-questions-asked 30-day return policy. Initiate a return online in under a minute.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-1 glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">24/7 Support</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">Round-the-clock dedicated support via live chat, email, and phone. Always here for you.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2 glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">Quality Guarantee</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">Every product is hand-inspected and certified authentic by our in-house quality team.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3 glass-light rounded-2xl p-6 sm:p-8 flex flex-col gap-4 border border-aurum-border/30 hover:border-aurum-gold/20 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-aurum-gold/10 flex items-center justify-center text-aurum-gold group-hover:bg-aurum-gold/20 transition-colors">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-aurum-white text-base mb-2">Trusted Brand</h3>
+            <p class="text-aurum-text text-sm leading-relaxed">Serving 50,000+ customers across 120 countries since 2018. A name you can rely on.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       BEST SELLERS
+  ═══════════════════════════════════════════ -->
+  <section id="best-sellers" class="py-24 lg:py-32 bg-aurum-dark" aria-label="Best Sellers">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+        <div>
+          <p class="section-label mb-3">All-Time Favorites</p>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light">
+            Best <em class="text-gold-gradient italic">Sellers</em>
+          </h2>
+        </div>
+        <a href="#" class="btn-outline px-6 py-2.5 rounded-xl self-start sm:self-end shrink-0">View All →</a>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+        <article class="product-card reveal bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80&auto=format&fit=crop" alt="Sneakers" class="w-full h-full object-cover" loading="lazy"/>
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">#1 Seller</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Velocity Runners')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Velocity Runner Pro</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(1.2K)</span></div>
+            <div class="flex items-center gap-2 mt-auto"><span class="font-semibold text-aurum-white text-sm">$320</span><span class="price-old">$410</span></div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-1 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&q=80&auto=format&fit=crop" alt="Tablet" class="w-full h-full object-cover" loading="lazy"/>
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">#2 Seller</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Nova Tablet')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Nova Pro Tablet</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(897)</span></div>
+            <div class="flex items-center gap-2 mt-auto"><span class="font-semibold text-aurum-white text-sm">$1,200</span><span class="price-old">$1,499</span></div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-2 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80&auto=format&fit=crop" alt="Backpack" class="w-full h-full object-cover" loading="lazy"/>
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">#3 Seller</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Explorer Backpack')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Explorer Weekender</h3>
+            <div class="stars text-xs">★★★★½ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(643)</span></div>
+            <div class="flex items-center gap-2 mt-auto"><span class="font-semibold text-aurum-white text-sm">$380</span><span class="price-old">$480</span></div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-3 bg-aurum-card rounded-2xl overflow-hidden border border-aurum-border/50 flex flex-col">
+          <div class="card-img relative bg-aurum-dark" style="aspect-ratio:1/1.15;">
+            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&q=80&auto=format&fit=crop" alt="Dress" class="w-full h-full object-cover" loading="lazy"/>
+            <span class="absolute top-3 left-3 bg-aurum-gold text-aurum-black text-[0.62rem] font-bold tracking-wider px-2.5 py-1 rounded-full">#4 Seller</span>
+            <button class="wishlist-btn absolute top-3 right-3 w-8 h-8 glass-light rounded-full flex items-center justify-center" aria-label="Add to wishlist" onclick="toggleWishlist(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
+            <div class="add-cart-btn absolute bottom-0 inset-x-0 p-3">
+              <button class="btn-gold w-full py-2.5 rounded-xl text-[0.72rem]" onclick="addToCart('Éclat Evening Dress')">Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="font-medium text-sm text-aurum-white leading-snug">Éclat Evening Dress</h3>
+            <div class="stars text-xs">★★★★★ <span class="text-aurum-text font-normal" style="font-family:'DM Sans',sans-serif;">(521)</span></div>
+            <div class="flex items-center gap-2 mt-auto"><span class="font-semibold text-aurum-white text-sm">$890</span><span class="price-old">$1,100</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATISTICS
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 relative overflow-hidden" aria-label="Brand statistics">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%);"></div>
+    <div class="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+
+        <div class="reveal text-center">
+          <div class="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-gold-gradient mb-2 stat-num" data-target="50000" data-suffix="K+">0</div>
+          <div class="text-aurum-text text-sm tracking-widest uppercase">Happy Customers</div>
+        </div>
+
+        <div class="reveal reveal-delay-1 text-center">
+          <div class="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-gold-gradient mb-2 stat-num" data-target="10000" data-suffix="K+">0</div>
+          <div class="text-aurum-text text-sm tracking-widest uppercase">Products Listed</div>
+        </div>
+
+        <div class="reveal reveal-delay-2 text-center">
+          <div class="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-gold-gradient mb-2 stat-num" data-target="120" data-suffix="+">0</div>
+          <div class="text-aurum-text text-sm tracking-widest uppercase">Countries Reached</div>
+        </div>
+
+        <div class="reveal reveal-delay-3 text-center">
+          <div class="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-gold-gradient mb-2 stat-num" data-target="99" data-suffix="%">0</div>
+          <div class="text-aurum-text text-sm tracking-widest uppercase">Satisfaction Rate</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════ -->
+  <section id="reviews" class="py-24 lg:py-32 bg-aurum-dark" aria-label="Customer Reviews">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="reveal text-center mb-14">
+        <p class="section-label mb-3">Social Proof</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light">
+          What Clients <em class="text-gold-gradient italic">Say</em>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="test-card reveal glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"The Lumière watch arrived better than I imagined. Packaging was immaculate. This is what luxury shopping should feel like."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop&crop=face" alt="James Harlow" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">James Harlow</div>
+              <div class="text-aurum-text text-xs">London, UK</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal reveal-delay-1 glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"I've ordered three times now and each time has been flawless. The leather jacket is my most-complimented piece. Worth every penny."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80&auto=format&fit=crop&crop=face" alt="Sophia Chen" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">Sophia Chen</div>
+              <div class="text-aurum-text text-xs">New York, USA</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal reveal-delay-2 glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"Customer support responded in 4 minutes at 11pm. The return process was completely painless. AURUM has raised my expectations permanently."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80&auto=format&fit=crop&crop=face" alt="Marco Rossi" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">Marco Rossi</div>
+              <div class="text-aurum-text text-xs">Milan, Italy</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal reveal-delay-1 glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5 md:col-span-2 lg:col-span-1">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"The Echo Pro headphones have completely changed my daily commute. Premium in every sense — sound, build, comfort. Nothing comes close."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80&auto=format&fit=crop&crop=face" alt="Aisha Patel" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">Aisha Patel</div>
+              <div class="text-aurum-text text-xs">Mumbai, India</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal reveal-delay-2 glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"Finally a brand that delivers on its promises. The fragrance is extraordinary and arrived two days early. Subscribed for life."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=80&q=80&auto=format&fit=crop&crop=face" alt="Luca Fontaine" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">Luca Fontaine</div>
+              <div class="text-aurum-text text-xs">Paris, France</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal reveal-delay-3 glass-light rounded-2xl p-7 border border-aurum-border/30 flex flex-col gap-5">
+          <div class="stars text-base">★★★★★</div>
+          <p class="text-aurum-text text-sm leading-relaxed italic font-display text-lg font-light">"Bought the Milano tote as a gift. My partner cried. The quality is museum-worthy. AURUM is the future of online luxury retail."</p>
+          <div class="flex items-center gap-3 mt-auto pt-4 border-t border-aurum-border/30">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80&auto=format&fit=crop&crop=face" alt="Nina Kovac" class="w-10 h-10 rounded-full object-cover border border-aurum-gold/30" loading="lazy"/>
+            <div>
+              <div class="text-aurum-white text-sm font-medium">Nina Kovac</div>
+              <div class="text-aurum-text text-xs">Vienna, Austria</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-aurum-gold text-xs tracking-wider">Verified</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       VIDEO PROMO
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 relative overflow-hidden" aria-label="Brand video">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+        <!-- Video Preview -->
+        <div class="reveal-left relative rounded-2xl overflow-hidden border border-aurum-border/30" style="aspect-ratio:16/10;">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80&auto=format&fit=crop" alt="Brand video thumbnail" class="w-full h-full object-cover" loading="lazy"/>
+          <div id="video-overlay" class="absolute inset-0 bg-aurum-black/60 flex items-center justify-center cursor-pointer group" onclick="handleVideoPlay()" role="button" aria-label="Play brand video" tabindex="0">
+            <div class="play-btn w-20 h-20 rounded-full border-2 border-white/50 backdrop-blur-sm flex items-center justify-center group-hover:border-aurum-gold/80 group-hover:bg-aurum-gold/10 transition-all">
+              <svg class="ml-1" width="26" height="26" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="reveal-right flex flex-col gap-7">
+          <p class="section-label">The AURUM Story</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-light leading-tight">
+            Designed With<br/><em class="text-gold-gradient italic">Obsession.</em><br/>Built to Last.
+          </h2>
+          <p class="text-aurum-text leading-relaxed">Every product in the AURUM collection passes through the hands of master craftspeople before reaching yours. We don't ship products — we deliver experiences. Watch how we source, test, and curate the world's finest goods.</p>
+          <ul class="flex flex-col gap-3">
+            <li class="flex items-center gap-3 text-sm text-aurum-text"><span class="w-5 h-5 rounded-full bg-aurum-gold/15 flex items-center justify-center text-aurum-gold text-xs">✓</span> 18-point quality inspection on every item</li>
+            <li class="flex items-center gap-3 text-sm text-aurum-text"><span class="w-5 h-5 rounded-full bg-aurum-gold/15 flex items-center justify-center text-aurum-gold text-xs">✓</span> Ethically sourced from verified global partners</li>
+            <li class="flex items-center gap-3 text-sm text-aurum-text"><span class="w-5 h-5 rounded-full bg-aurum-gold/15 flex items-center justify-center text-aurum-gold text-xs">✓</span> Carbon-neutral shipping on all orders</li>
+          </ul>
+          <a href="#products" class="btn-gold px-7 py-3.5 rounded-xl self-start inline-flex items-center gap-2.5">
+            Shop The Collection
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SPECIAL OFFER / COUNTDOWN
+  ═══════════════════════════════════════════ -->
+  <section class="offer-bg py-20 lg:py-28 relative" aria-label="Special offer">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 text-center">
+
+      <div class="reveal inline-block mb-4">
+        <span class="section-label bg-aurum-gold/10 px-5 py-2 rounded-full border border-aurum-gold/20">Limited Time Offer</span>
+      </div>
+
+      <h2 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-7xl font-light mb-5 leading-tight">
+        Get <em class="text-gold-gradient italic">40% Off</em><br/>Your First Order
+      </h2>
+
+      <p class="reveal reveal-delay-2 text-aurum-text text-base mb-10 max-w-lg mx-auto">Use code <span class="text-aurum-gold font-semibold tracking-widest">AURUM40</span> at checkout. Offer expires when the timer hits zero. Don't miss your chance.</p>
+
+      <!-- Countdown Timer -->
+      <div class="reveal reveal-delay-3 flex justify-center gap-4 sm:gap-6 mb-10" aria-label="Countdown timer">
+        <div class="glass rounded-xl px-5 sm:px-8 py-5 min-w-[75px]">
+          <div id="cd-hours" class="font-display text-4xl sm:text-5xl font-light text-aurum-white tabular-nums">00</div>
+          <div class="text-aurum-text text-xs tracking-widest uppercase mt-1">Hours</div>
+        </div>
+        <div class="flex items-center text-aurum-gold text-3xl font-light pb-4">:</div>
+        <div class="glass rounded-xl px-5 sm:px-8 py-5 min-w-[75px]">
+          <div id="cd-mins" class="font-display text-4xl sm:text-5xl font-light text-aurum-white tabular-nums">00</div>
+          <div class="text-aurum-text text-xs tracking-widest uppercase mt-1">Minutes</div>
+        </div>
+        <div class="flex items-center text-aurum-gold text-3xl font-light pb-4">:</div>
+        <div class="glass rounded-xl px-5 sm:px-8 py-5 min-w-[75px]">
+          <div id="cd-secs" class="font-display text-4xl sm:text-5xl font-light text-aurum-white tabular-nums">00</div>
+          <div class="text-aurum-text text-xs tracking-widest uppercase mt-1">Seconds</div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-4">
+        <a href="#products" class="btn-gold px-10 py-4 rounded-xl inline-flex items-center gap-3 text-sm">
+          Claim Offer Now
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 bg-aurum-dark" aria-label="Frequently Asked Questions">
+    <div class="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="reveal text-center mb-14">
+        <p class="section-label mb-3">Got Questions?</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light">
+          FAQ<em class="text-gold-gradient italic">s</em>
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-2" id="faq-container">
+
+        <div class="faq-item reveal glass-light rounded-xl border border-aurum-border/30 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left group" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="font-medium text-aurum-white text-sm sm:text-base pr-4">How long does shipping take?</span>
+            <span class="faq-icon text-aurum-gold text-2xl font-light shrink-0 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-0">
+            <p class="text-aurum-text text-sm leading-relaxed pb-6">Standard shipping takes 5–8 business days globally. Express delivery (2–4 days) is available at checkout. All orders receive real-time tracking and signature confirmation for orders over $200. We ship to 120+ countries from our fulfillment centers in New York, London, and Singapore.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-1 glass-light rounded-xl border border-aurum-border/30 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left group" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="font-medium text-aurum-white text-sm sm:text-base pr-4">What is your return policy?</span>
+            <span class="faq-icon text-aurum-gold text-2xl font-light shrink-0 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-0">
+            <p class="text-aurum-text text-sm leading-relaxed pb-6">We offer a hassle-free 30-day return policy on all items. Products must be in original, unworn condition with tags attached. Simply log into your account, initiate a return, and we'll send a prepaid shipping label within 24 hours. Refunds are processed within 3–5 business days.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-2 glass-light rounded-xl border border-aurum-border/30 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left group" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="font-medium text-aurum-white text-sm sm:text-base pr-4">Are all products authentic?</span>
+            <span class="faq-icon text-aurum-gold text-2xl font-light shrink-0 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-0">
+            <p class="text-aurum-text text-sm leading-relaxed pb-6">Absolutely. Every product sold on AURUM is 100% authentic and sourced directly from brands or authorized distributors. Our 18-point authentication process includes material verification, serial number checking, and packaging inspection. We provide certificates of authenticity with all watches and jewelry.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-3 glass-light rounded-xl border border-aurum-border/30 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left group" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="font-medium text-aurum-white text-sm sm:text-base pr-4">Which payment methods are accepted?</span>
+            <span class="faq-icon text-aurum-gold text-2xl font-light shrink-0 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-0">
+            <p class="text-aurum-text text-sm leading-relaxed pb-6">We accept all major credit and debit cards (Visa, Mastercard, Amex, Discover), PayPal, Apple Pay, Google Pay, and select cryptocurrencies (Bitcoin, Ethereum). All transactions are encrypted with 256-bit SSL. We also offer buy-now-pay-later through Klarna and Afterpay.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-delay-4 glass-light rounded-xl border border-aurum-border/30 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-6 text-left group" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="font-medium text-aurum-white text-sm sm:text-base pr-4">Do you offer gift wrapping?</span>
+            <span class="faq-icon text-aurum-gold text-2xl font-light shrink-0 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-0">
+            <p class="text-aurum-text text-sm leading-relaxed pb-6">Yes — our signature gift wrapping service is available at checkout for $9.99. Each gift includes a hand-tied ribbon, your personalized message on embossed card stock, and comes packaged in our premium matte-black AURUM box. Corporate gifting programs with volume discounts are also available.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       NEWSLETTER
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 relative overflow-hidden" aria-label="Newsletter signup">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 65%);"></div>
+    <div class="relative max-w-[700px] mx-auto px-4 sm:px-6 lg:px-10 text-center">
+
+      <div class="reveal">
+        <p class="section-label mb-4">Stay Connected</p>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light mb-5 leading-tight">
+          Join the <em class="text-gold-gradient italic">Inner Circle</em>
+        </h2>
+        <p class="text-aurum-text text-base mb-10">Be first to know about new drops, exclusive offers, and members-only events. No spam. Unsubscribe anytime.</p>
+      </div>
+
+      <form id="newsletter-form" class="reveal reveal-delay-1 flex flex-col sm:flex-row gap-3" onsubmit="handleNewsletter(event)" novalidate>
+        <input
+          id="nl-email"
+          type="email"
+          placeholder="Enter your email address"
+          class="input-field flex-1 px-5 py-4 rounded-xl text-sm"
+          autocomplete="email"
+          required
+          aria-label="Email address for newsletter"
+        />
+        <button type="submit" class="btn-gold px-7 py-4 rounded-xl text-[0.78rem] shrink-0">Subscribe</button>
+      </form>
+      <p id="nl-error" class="text-red-400 text-xs mt-2 hidden" role="alert">Please enter a valid email address.</p>
+      <p id="nl-success" class="text-aurum-gold text-xs mt-3 hidden" role="status">✓ You're in! Welcome to the AURUM Inner Circle.</p>
+      <p class="reveal reveal-delay-2 text-aurum-text/50 text-xs mt-5">By subscribing you agree to our <a href="#" class="underline hover:text-aurum-text">Privacy Policy</a>.</p>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════ -->
+  <section id="contact" class="py-24 lg:py-32 bg-aurum-dark" aria-label="Contact us">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+
+        <!-- Left: Info -->
+        <div class="reveal-left flex flex-col gap-8">
+          <div>
+            <p class="section-label mb-3">Get In Touch</p>
+            <h2 class="font-display text-4xl sm:text-5xl font-light leading-tight">
+              We'd Love to <em class="text-gold-gradient italic">Hear</em><br/>From You
+            </h2>
+          </div>
+          <p class="text-aurum-text leading-relaxed">Whether you have a question about a product, need help with an order, or want to explore a wholesale partnership — our team is ready to help.</p>
+
+          <div class="flex flex-col gap-5">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-aurum-gold/10 flex items-center justify-center text-aurum-gold shrink-0">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="text-aurum-white text-sm font-medium mb-0.5">Our Address</div>
+                <div class="text-aurum-text text-sm">150 Fifth Avenue, Suite 800<br/>New York, NY 10011, USA</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-aurum-gold/10 flex items-center justify-center text-aurum-gold shrink-0">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="text-aurum-white text-sm font-medium mb-0.5">Email Us</div>
+                <a href="mailto:hello@aurumstore.com" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">hello@aurumstore.com</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-aurum-gold/10 flex items-center justify-center text-aurum-gold shrink-0">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.19 1.15 2 2 0 012.18.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.09A16 16 0 0015.09 16.27l1.45-1.45a2 2 0 012.11-.45 12.84 12.84 0 002.81.7 2 2 0 011.54 2.05z"/></svg>
+              </div>
+              <div>
+                <div class="text-aurum-white text-sm font-medium mb-0.5">Call Us</div>
+                <a href="tel:+12125550180" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">+1 (212) 555-0180</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="reveal-right">
+          <form id="contact-form" class="glass-light rounded-2xl p-7 sm:p-10 border border-aurum-border/30 flex flex-col gap-5" onsubmit="handleContact(event)" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="flex flex-col gap-2">
+                <label for="c-name" class="text-aurum-text text-xs tracking-widest uppercase">Name *</label>
+                <input id="c-name" type="text" class="input-field px-4 py-3 rounded-xl text-sm" placeholder="Your full name" required autocomplete="name"/>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="c-email" class="text-aurum-text text-xs tracking-widest uppercase">Email *</label>
+                <input id="c-email" type="email" class="input-field px-4 py-3 rounded-xl text-sm" placeholder="your@email.com" required autocomplete="email"/>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="c-phone" class="text-aurum-text text-xs tracking-widest uppercase">Phone</label>
+              <input id="c-phone" type="tel" class="input-field px-4 py-3 rounded-xl text-sm" placeholder="+1 (___) ___-____" autocomplete="tel"/>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="c-msg" class="text-aurum-text text-xs tracking-widest uppercase">Message *</label>
+              <textarea id="c-msg" rows="5" class="input-field px-4 py-3 rounded-xl text-sm resize-none" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+            <button type="submit" class="btn-gold py-4 rounded-xl text-sm w-full" id="contact-submit">Send Message</button>
+            <p id="c-error" class="text-red-400 text-xs hidden" role="alert">Please fill in all required fields with valid information.</p>
+            <p id="c-success" class="text-aurum-gold text-xs hidden" role="status">✓ Message sent! We'll respond within 24 hours.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="bg-aurum-dark border-t border-aurum-border/30 pt-16 pb-8" role="contentinfo">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+      <!-- Footer Top -->
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+
+        <!-- Brand -->
+        <div class="col-span-2 sm:col-span-2 lg:col-span-2">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="w-7 h-7 rounded-full bg-gold-gradient flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,13 1,13" fill="#0A0A0A"/></svg>
+            </div>
+            <span class="font-display text-xl font-semibold tracking-[0.2em] text-aurum-white">AURUM</span>
+          </div>
+          <p class="text-aurum-text text-sm leading-relaxed max-w-xs mb-6">Curating the world's finest products for people who refuse to compromise. Premium fashion, electronics, and lifestyle — delivered worldwide.</p>
+          <div class="flex items-center gap-3">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 glass-light rounded-lg flex items-center justify-center text-aurum-text hover:text-aurum-gold hover:border-aurum-gold/30 transition-all border border-transparent" aria-label="Instagram">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 glass-light rounded-lg flex items-center justify-center text-aurum-text hover:text-aurum-gold transition-all border border-transparent hover:border-aurum-gold/30" aria-label="Twitter/X">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 glass-light rounded-lg flex items-center justify-center text-aurum-text hover:text-aurum-gold transition-all border border-transparent hover:border-aurum-gold/30" aria-label="Facebook">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 glass-light rounded-lg flex items-center justify-center text-aurum-text hover:text-aurum-gold transition-all border border-transparent hover:border-aurum-gold/30" aria-label="Pinterest">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-aurum-white text-xs font-semibold tracking-widest uppercase mb-5">Quick Links</h3>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="#home"         class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Home</a></li>
+            <li><a href="#products"     class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">New Arrivals</a></li>
+            <li><a href="#best-sellers" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Best Sellers</a></li>
+            <li><a href="#categories"   class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Categories</a></li>
+            <li><a href="#reviews"      class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Reviews</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div>
+          <h3 class="text-aurum-white text-xs font-semibold tracking-widest uppercase mb-5">Categories</h3>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="#categories" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Fashion</a></li>
+            <li><a href="#categories" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Electronics</a></li>
+            <li><a href="#categories" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Shoes</a></li>
+            <li><a href="#categories" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Watches</a></li>
+            <li><a href="#categories" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Lifestyle</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h3 class="text-aurum-white text-xs font-semibold tracking-widest uppercase mb-5">Support</h3>
+          <ul class="flex flex-col gap-3" role="list">
+            <li><a href="#contact"  class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Contact Us</a></li>
+            <li><a href="#faq-container" class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">FAQs</a></li>
+            <li><a href="#"         class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Track Order</a></li>
+            <li><a href="#"         class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Returns</a></li>
+            <li><a href="#"         class="text-aurum-text text-sm hover:text-aurum-gold transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Gold Line -->
+      <div class="gold-line mb-8"></div>
+
+      <!-- Footer Bottom -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-aurum-text text-xs text-center sm:text-left">© 2025 AURUM Lifestyle. All rights reserved. Crafted with precision.</p>
+        <div class="flex items-center gap-4">
+          <!-- Payment icons as text -->
+          <div class="flex items-center gap-2 text-aurum-text/40 text-[0.6rem] tracking-wider">
+            <span class="border border-current px-2 py-0.5 rounded">VISA</span>
+            <span class="border border-current px-2 py-0.5 rounded">MC</span>
+            <span class="border border-current px-2 py-0.5 rounded">AMEX</span>
+            <span class="border border-current px-2 py-0.5 rounded">PayPal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* ─────────────────────────────────────────
+       PAGE LOADER
+    ───────────────────────────────────────── */
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      const bar = loader.querySelector('.loader-bar');
+      // Animate bar
+      setTimeout(() => { bar.style.width = '100%'; }, 50);
+      setTimeout(() => { loader.classList.add('hidden'); }, 1400);
+    });
+
+
+    /* ─────────────────────────────────────────
+       NAVBAR — SCROLL & ACTIVE LINKS
+    ───────────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      updateActiveNav();
+    }, { passive: true });
+
+    function updateActiveNav() {
+      const sections = ['home', 'products', 'categories', 'best-sellers', 'reviews', 'contact'];
+      const scrollPos = window.scrollY + 120;
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        const link = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (link) {
+          if (scrollPos >= top && scrollPos < bottom) {
+            link.classList.add('text-aurum-white');
+            link.classList.remove('text-aurum-text');
+          } else {
+            link.classList.remove('text-aurum-white');
+            link.classList.add('text-aurum-text');
+          }
+        }
+      });
+    }
+
+
+    /* ─────────────────────────────────────────
+       MOBILE MENU
+    ───────────────────────────────────────── */
+    const hamBtn = document.getElementById('ham-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    hamBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      hamBtn.classList.toggle('ham-open', menuOpen);
+      mobileMenu.classList.toggle('open', menuOpen);
+      mobileMenu.classList.toggle('closed', !menuOpen);
+      hamBtn.setAttribute('aria-expanded', String(menuOpen));
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      menuOpen = false;
+      hamBtn.classList.remove('ham-open');
+      mobileMenu.classList.remove('open');
+      mobileMenu.classList.add('closed');
+      hamBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // Close menu on outside click
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOpen) closeMenu();
+    });
+
+
+    /* ─────────────────────────────────────────
+       SCROLL REVEAL OBSERVER
+    ───────────────────────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Start counters when stats section is visible
+          if (entry.target.closest && entry.target.closest('[aria-label="Brand statistics"]')) {
+            startCounters();
+          }
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+
+    /* ─────────────────────────────────────────
+       STAT COUNTERS
+    ───────────────────────────────────────── */
+    let countersStarted = false;
+    function startCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 2000;
+        const start = performance.now();
+        const fmt = (n) => {
+          if (target >= 1000) return Math.round(n / 1000) + suffix;
+          return Math.round(n) + suffix;
+        };
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+          el.textContent = fmt(target * ease);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // Also start on scroll into view
+    const statsSection = document.querySelector('[aria-label="Brand statistics"]');
+    if (statsSection) {
+      const statsObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          startCounters();
+          statsObs.disconnect();
+        }
+      }, { threshold: 0.3 });
+      statsObs.observe(statsSection);
+    }
+
+
+    /* ─────────────────────────────────────────
+       COUNTDOWN TIMER
+    ───────────────────────────────────────── */
+    function initCountdown() {
+      // Set target to 11 hours 59 minutes from now
+      const stored = localStorage.getItem('aurum-offer-end');
+      let endTime;
+      if (stored) {
+        endTime = parseInt(stored, 10);
+      } else {
+        endTime = Date.now() + 11 * 3600 * 1000 + 59 * 60 * 1000;
+        localStorage.setItem('aurum-offer-end', String(endTime));
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = Math.max(0, endTime - now);
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+        document.getElementById('cd-mins').textContent  = String(m).padStart(2, '0');
+        document.getElementById('cd-secs').textContent  = String(s).padStart(2, '0');
+        if (diff <= 0) clearInterval(cdInterval);
+      }
+
+      updateCountdown();
+      const cdInterval = setInterval(updateCountdown, 1000);
+    }
+    initCountdown();
+
+
+    /* ─────────────────────────────────────────
+       FAQ ACCORDION
+    ───────────────────────────────────────── */
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = answer.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-answer.open').forEach(el => {
+        el.classList.remove('open');
+        el.closest('.faq-item').querySelector('.faq-icon').textContent = '+';
+        el.closest('.faq-item').querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        answer.classList.add('open');
+        icon.textContent = '×';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+
+    /* ─────────────────────────────────────────
+       WISHLIST TOGGLE
+    ───────────────────────────────────────── */
+    function toggleWishlist(btn) {
+      const isFav = btn.classList.toggle('active');
+      const svg = btn.querySelector('svg');
+      svg.style.fill = isFav ? '#C9A84C' : 'none';
+      svg.style.stroke = isFav ? '#C9A84C' : 'currentColor';
+      showToast(isFav ? 'Added to wishlist ♥' : 'Removed from wishlist', isFav ? '♥' : '♡');
+    }
+
+
+    /* ─────────────────────────────────────────
+       ADD TO CART
+    ───────────────────────────────────────── */
+    let cartCount = 3;
+    function addToCart(name) {
+      cartCount++;
+      const counts = document.querySelectorAll('#cart-count');
+      counts.forEach(el => { el.textContent = cartCount; });
+      showToast(`"${name}" added to cart`, '🛒');
+    }
+
+
+    /* ─────────────────────────────────────────
+       TOAST NOTIFICATION
+    ───────────────────────────────────────── */
+    let toastTimer;
+    function showToast(msg, icon = '✓') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+
+    /* ─────────────────────────────────────────
+       VIDEO PLAY
+    ───────────────────────────────────────── */
+    function handleVideoPlay() {
+      const overlay = document.getElementById('video-overlay');
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      showToast('Video playback coming soon!', '▶');
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+      }, 3000);
+    }
+
+
+    /* ─────────────────────────────────────────
+       NEWSLETTER FORM
+    ───────────────────────────────────────── */
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const emailEl = document.getElementById('nl-email');
+      const errorEl = document.getElementById('nl-error');
+      const successEl = document.getElementById('nl-success');
+      const email = emailEl.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      errorEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+
+      if (!valid) {
+        errorEl.classList.remove('hidden');
+        emailEl.focus();
+        return;
+      }
+
+      successEl.classList.remove('hidden');
+      emailEl.value = '';
+      showToast('Welcome to the Inner Circle!', '✦');
+    }
+
+
+    /* ─────────────────────────────────────────
+       CONTACT FORM
+    ───────────────────────────────────────── */
+    function handleContact(e) {
+      e.preventDefault();
+      const name    = document.getElementById('c-name').value.trim();
+      const email   = document.getElementById('c-email').value.trim();
+      const msg     = document.getElementById('c-msg').value.trim();
+      const errorEl = document.getElementById('c-error');
+      const succEl  = document.getElementById('c-success');
+      const btn     = document.getElementById('contact-submit');
+
+      errorEl.classList.add('hidden');
+      succEl.classList.add('hidden');
+
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !validEmail || !msg) {
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        succEl.classList.remove('hidden');
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        document.getElementById('contact-form').reset();
+        showToast('Message sent! We\'ll reply soon.', '✓');
+      }, 1200);
+    }
+
+
+    /* ─────────────────────────────────────────
+       SMOOTH SCROLL POLYFILL FOR OLDER BROWSERS
+    ───────────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const y = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
