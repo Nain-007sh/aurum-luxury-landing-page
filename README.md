@@ -197,7 +197,7 @@ Potential enhancements include:
 
 **Muhammad Husnain Raheem**
 
-Aspiring Data Scientist | Data Analyst | Front-End Developer
+AI Enthusiast | Data Analyst | Front-End Developer
 
 GitHub:
 https://github.com/Nain-007sh
