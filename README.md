@@ -204,12 +204,4 @@ https://github.com/Nain-007sh
 
 ---
 
-## License
-
-This project is available for educational and portfolio purposes.
-
-Feel free to use, modify, and customize it for your own projects.
-
----
-
 ### Crafted with attention to detail, luxury aesthetics, and modern web design principles.
